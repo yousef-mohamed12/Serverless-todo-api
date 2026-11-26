@@ -6,6 +6,12 @@ A plain-language guide to the Serverless To-Do project. Read this first, then us
 
 A small web app where people sign in and keep a private to-do list. The app is simple on purpose. The real goal is to show how AWS services work together to make an app that is secure, fast and needs no servers to manage.
 
+## Architecture diagram
+
+![Solution architecture diagram](docs/architecture.png)
+
+*A user's request flows left to right: CloudFront, WAF, API Gateway, Lambda, DynamoDB. Cognito handles login, and X-Ray traces the green area.*
+
 ## The parts, in everyday terms
 
 | Part | What it does | Think of it as |
@@ -50,5 +56,3 @@ A small web app where people sign in and keep a private to-do list. The app is s
 ## Explain it in one minute
 
 This is a serverless to-do app on AWS. Users load the site from S3 through CloudFront and sign in with Cognito. Every API request passes through WAF, then API Gateway, which checks the Cognito token. A Lambda function handles the create, read, update and delete actions and stores each user's tasks in DynamoDB. Changes in DynamoDB trigger a second Lambda through Streams, and X-Ray traces the request from API Gateway to DynamoDB. It is secure, scalable and has no servers to manage.
-
-## 
